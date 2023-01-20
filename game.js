@@ -1,4 +1,5 @@
 const prompt = require('prompt-sync')();
+const colour = require("ansi-colors");
 
 let genNumber, userInput;
 
@@ -31,10 +32,10 @@ function playAgain() {
 
 function checkNumber(userInput, genNumber) {
     if (userInput === genNumber) {
-        console.log(`You guessed correctly! Your number is ${userInput}.`); 
+        console.log(colour.green('You guessed correctly! ') + `Your number is ${userInput}.`); 
         playAgain();
     } else if (userInput != genNumber){
-        console.log(`You guessed wrong. Your number is ${userInput} and computer number is ${genNumber}.`)
+        console.log(colour.yellow('You guessed wrong. ') + `Your number is ${userInput} and computer number is ${genNumber}.`)
         playAgain();
     }
 }
