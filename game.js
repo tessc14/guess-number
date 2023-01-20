@@ -1,37 +1,40 @@
-let genNumber, userInput; 
+const prompt = require('prompt-sync')();
 
+let genNumber, userInput;
 
 function playGame() {
-// generate random number between 1-10
-genNumber = Math.floor(Math.random()* 10) + 1;
-// ask for user input
+    // generate random number between 1-10
+    genNumber = Math.floor(Math.random()* 10) + 1;
 
-const prompt = require('prompt-sync')();
-userInput = prompt('Guess a number between 1 and 10... ');
-userInput = parseInt(userInput);
-console.log(typeof userInput)
+    // ask for user input
+    userInput = prompt('Guess a number between 1 and 10 to play, or any other key to exit... ');
+    userInput = parseInt(userInput);
+
+    if (userInput <=10 && userInput >= 1) {
+        checkNumber(userInput, genNumber);
+    } else {
+        console.log("Thank you for playing!");
+    }
 }
+
 playGame();
 
-if (userInput && typeof userInput === "number" && userInput <= 10 && userInput >=1) {
-// if they match, user wins
-if (userInput === genNumber) {
-    console.log("You guessed correctly!")
-    
-} else if (userInput !== genNumber){
-    console.log("You guessed wrong")
+function playAgain() {
+    const replay = prompt('Type x to play again or any other key to exit... ')
 
-}
-} else {
-    console.log("Please enter a number between 1 and 10")
-}
-
-
-const playAgain = prompt('Type x to play again or any other key to exit')
-    if (playAgain === "x") {
+    if (replay === "x") {
         playGame()
     } else {
-        console.log("Thank you for playing")
+        console.log("Thank you for playing!")
     }
+}
 
-// if not, ask to start again?
+function checkNumber(userInput, genNumber) {
+    if (userInput === genNumber) {
+        console.log(`You guessed correctly! Your number is ${userInput}.`); 
+        playAgain();
+    } else if (userInput != genNumber){
+        console.log(`You guessed wrong. Your number is ${userInput} and computer number is ${genNumber}.`)
+        playAgain();
+    }
+}
